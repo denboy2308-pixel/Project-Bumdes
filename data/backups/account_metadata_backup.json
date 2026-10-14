@@ -1,0 +1,28 @@
+{
+  "backupTimestamp": "2026-10-12T11:24:11.071Z",
+  "sourceDatabase": "active_local_db",
+  "totalRecords": 3,
+  "users": [
+    {
+      "uid": "usr_superadmin",
+      "email": "admin@bumdesa.id",
+      "role": "superadmin",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "uid": "usr_karyawan",
+      "email": "karyawan@bumdesa.id",
+      "role": "karyawan",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    },
+    {
+      "uid": "usr_warga",
+      "email": "warga@bumdesa.id",
+      "role": "pengguna",
+      "status": "active",
+      "createdAt": "2026-01-01T00:00:00.000Z"
+    }
+  ]
+}

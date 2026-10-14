@@ -1,0 +1,6 @@
+{
+  "summary": "Rencana implementasi pembaruan komprehensif Dashboard Super Admin: pengelompokan 5 menu sidebar kiri (Ikhtisar, Manajemen Pengguna, Web, AI Brain, Sistem), fitur manajemen penuh database pengguna (cek profil, edit, ubah data, bekukan, hapus aman), serta integrasi modul Autonomous AI Brain untuk pemindaian mandiri, deteksi bug, dan self-healing otomatis.",
+  "updatedAt": "2026-10-13T11:47:06.110742455Z",
+  "requestFeedback": true,
+  "userFacing": true
+}

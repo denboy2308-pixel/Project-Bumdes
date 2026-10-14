@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "collections": {
+    "admins": {
+      "description": "Administrator and staff directory with role-based access control",
+      "fields": {
+        "uid": { "type": "string", "description": "Firebase Auth user UID" },
+        "name": { "type": "string", "description": "Full name and title" },
+        "email": { "type": "string", "description": "Staff email" },
+        "role": { "type": "string", "description": "superadmin | direktur | bendahara | karyawan | operator | manajer_fasilitas | editor | auditor | pic_wilayah" },
+        "assignedZone": { "type": "string", "description": "Assigned area/dusun for pic_wilayah" },
+        "active": { "type": "boolean", "description": "Account active flag" },
+        "phone": { "type": "string", "description": "WhatsApp/phone" },
+        "createdAt": { "type": "string", "description": "Creation ISO date" }
+      }
+    },
+    "siteSettings": {
+      "description": "Global website configuration and Meta SEO management",
+      "fields": {
+        "siteName": { "type": "string", "description": "Public site title" },
+        "metaTitle": { "type": "string", "description": "SEO Meta Title" },
+        "metaDescription": { "type": "string", "description": "SEO Meta Description" },
+        "metaKeywords": { "type": "string", "description": "SEO Keywords" },
+        "ogTitle": { "type": "string", "description": "Open Graph Title" },
+        "ogDescription": { "type": "string", "description": "Open Graph Description" },
+        "canonicalUrl": { "type": "string", "description": "Canonical URL" },
+        "contactPhone": { "type": "string", "description": "WhatsApp contact number" },
+        "runningText": { "type": "string", "description": "Announcement text" },
+        "bookingOpen": { "type": "boolean", "description": "Online booking switch" },
+        "updatedAt": { "type": "string", "description": "Last update ISO date" }
+      }
+    },
+    "reservations": {
+      "description": "Live court sport reservations",
+      "fields": {
+        "reservationId": { "type": "string", "description": "Unique booking code" },
+        "courtId": { "type": "string", "description": "Court identifier" },
+        "courtName": { "type": "string", "description": "Court name" },
+        "date": { "type": "string", "description": "Booking date YYYY-MM-DD" },
+        "slots": { "type": "array", "description": "List of time slots" },
+        "totalAmount": { "type": "number", "description": "Total price in IDR" },
+        "status": { "type": "string", "description": "pending | confirmed | completed | cancelled" },
+        "paymentMethod": { "type": "string", "description": "qris | transfer | cash" },
+        "paymentStatus": { "type": "string", "description": "unpaid | paid | refunded" },
+        "customer": { "type": "map", "description": "Customer name, phone, teamName" },
+        "isCheckedIn": { "type": "boolean", "description": "Field arrival flag" },
+        "createdAt": { "type": "string", "description": "Created timestamp" }
+      }
+    },
+    "hallBookings": {
+      "description": "Village Multipurpose Hall reservations",
+      "fields": {
+        "bookingId": { "type": "string", "description": "Hall booking ID" },
+        "customer": { "type": "map", "description": "Customer identity" },
+        "tanggal": { "type": "string", "description": "Event date" },
+        "durasi": { "type": "string", "description": "Duration in days" },
+        "jenisAcara": { "type": "string", "description": "Event type" },
+        "status": { "type": "string", "description": "diajukan | disetujui | ditolak | selesai" },
+        "totalBiaya": { "type": "number", "description": "Total fee" },
+        "createdAt": { "type": "string", "description": "Submission timestamp" }
+      }
+    },
+    "finances": {
+      "description": "Financial ledger transactions",
+      "fields": {
+        "type": { "type": "string", "description": "income | expense" },
+        "category": { "type": "string", "description": "sewa_lapangan | sewa_gedung | operasional | perawatan" },
+        "amount": { "type": "number", "description": "Amount in IDR" },
+        "description": { "type": "string", "description": "Transaction description" },
+        "date": { "type": "string", "description": "Transaction date" }
+      }
+    },
+    "auditLogs": {
+      "description": "System activity logs for compliance",
+      "fields": {
+        "actorName": { "type": "string", "description": "Staff name" },
+        "actorRole": { "type": "string", "description": "Staff role" },
+        "action": { "type": "string", "description": "Action performed" },
+        "timestamp": { "type": "string", "description": "Execution timestamp" }
+      }
+    }
+  }
+}

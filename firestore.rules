@@ -1,0 +1,212 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Catch-All Safety Net: Default Deny All
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- Authentication & Custom Claim Role Helpers ---
+    // Roles must be issued strictly via Firebase Auth Custom Claims (Admin SDK)
+    // Client cannot forge request.auth.token claims.
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function getRole() {
+      return isSignedIn() && 'role' in request.auth.token ? request.auth.token.role : '';
+    }
+
+    // Role predicates matching src/types/admin.ts:
+    // 'superadmin' | 'direktur' | 'bendahara' | 'karyawan' | 'operator' | 'manajer_fasilitas' | 'editor' | 'auditor' | 'pic_wilayah' | 'pelanggan'
+    function isSuperAdmin() {
+      return isEmailVerified() && getRole() == 'superadmin';
+    }
+
+    function isStaffOrAdmin() {
+      return isEmailVerified() && (
+        getRole() in [
+          'superadmin',
+          'direktur',
+          'bendahara',
+          'karyawan',
+          'operator',
+          'manajer_fasilitas',
+          'editor',
+          'auditor',
+          'pic_wilayah'
+        ]
+      );
+    }
+
+    function isFinanceManager() {
+      return isEmailVerified() && (
+        getRole() in ['superadmin', 'direktur', 'bendahara', 'auditor']
+      );
+    }
+
+    function isAuditorOrAdmin() {
+      return isEmailVerified() && (
+        getRole() in ['superadmin', 'auditor', 'direktur']
+      );
+    }
+
+    function isFacilityStaff() {
+      return isEmailVerified() && (
+        getRole() in ['superadmin', 'direktur', 'manajer_fasilitas', 'karyawan', 'operator']
+      );
+    }
+
+    // Static identifier validator (ID poisoning guard)
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // Helper shorthand
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // --- 1. User Profiles & Registrations (/users/{userId}) ---
+    // Strict profile boundary: Only owner or SuperAdmin can read.
+    // Writes restricted: Owners can only edit harmless profile fields.
+    // RBAC fields, email_verified status, role, and UID are strictly protected.
+    match /users/{userId} {
+      allow get: if isSignedIn() && isValidId(userId) && (request.auth.uid == userId || isStaffOrAdmin());
+      allow list: if isStaffOrAdmin();
+
+      // Owner can update their own safe profile attributes with strict type and size bounds
+      allow update: if isSignedIn() && isValidId(userId) && request.auth.uid == userId
+        && incoming().diff(existing()).affectedKeys().hasOnly(['name', 'phone', 'address', 'avatarUrl', 'updatedAt'])
+        && (!('name' in incoming()) || (incoming().name is string && incoming().name.size() <= 100))
+        && (!('phone' in incoming()) || (incoming().phone is string && incoming().phone.size() <= 25))
+        && (!('address' in incoming()) || (incoming().address is string && incoming().address.size() <= 250))
+        && (!('avatarUrl' in incoming()) || (incoming().avatarUrl is string && incoming().avatarUrl.size() <= 500))
+        && incoming().updatedAt is timestamp
+        // Prohibit privilege escalation: role, email, email_verified, id/uid cannot be mutated by client
+        && (!('role' in incoming()) || incoming().role == existing().role)
+        && (!('uid' in incoming()) || incoming().uid == existing().uid)
+        && (!('email' in incoming()) || incoming().email == existing().email);
+
+      // Client creation or deletion of users is prohibited; accounts must be provisioned via trusted backend
+      allow create, delete: if false;
+    }
+
+    // --- 2. Admin & Staff Directory (/admins/{adminId}) ---
+    // Read: Only verified staff/admin can view directory.
+    // Client cannot create, edit, elevate role, or delete admin accounts (backend Admin SDK only).
+    match /admins/{adminId} {
+      allow get: if isStaffOrAdmin() && isValidId(adminId);
+      allow list: if isStaffOrAdmin();
+      allow create, update, delete: if false;
+    }
+
+    // --- 3. Audit Logs (/auditLogs/{logId}) ---
+    // Read: Only verified auditor or superadmin.
+    // Client creation, mutation, or deletion is strictly forbidden to prevent log tampering.
+    match /auditLogs/{logId} {
+      allow get: if isAuditorOrAdmin() && isValidId(logId);
+      allow list: if isAuditorOrAdmin();
+      allow create, update, delete: if false;
+    }
+
+    // --- 4. Court Sports Reservations (/reservations/{reservationId}) ---
+    // No public read. Owner can read their own reservations; authorized facility staff can read.
+    // All creations, confirmations, cancellations, and status mutations are handled via trusted backend.
+    match /reservations/{reservationId} {
+      allow get: if isValidId(reservationId) && isSignedIn() && (
+        (resource.data.ownerUid is string && resource.data.ownerUid == request.auth.uid) ||
+        isFacilityStaff()
+      );
+      allow list: if isSignedIn() && (
+        (resource.data.ownerUid is string && resource.data.ownerUid == request.auth.uid) ||
+        isFacilityStaff()
+      );
+      allow create, update, delete: if false;
+    }
+
+    // --- 5. Village Hall Bookings (/hallBookings/{bookingId}) ---
+    // No public read. Owner can read their own bookings; authorized facility staff can read.
+    // Direct client creation or state manipulation is forbidden (trusted backend only).
+    match /hallBookings/{bookingId} {
+      allow get: if isValidId(bookingId) && isSignedIn() && (
+        (resource.data.ownerUid is string && resource.data.ownerUid == request.auth.uid) ||
+        isFacilityStaff()
+      );
+      allow list: if isSignedIn() && (
+        (resource.data.ownerUid is string && resource.data.ownerUid == request.auth.uid) ||
+        isFacilityStaff()
+      );
+      allow create, update, delete: if false;
+    }
+
+    // --- 6. Files & Documents Metadata (/files/{fileId}) ---
+    // No public read. Accessible strictly to file owner or authorized staff.
+    // File metadata records must be created and modified through trusted backend verification.
+    match /files/{fileId} {
+      allow get: if isValidId(fileId) && isSignedIn() && (
+        (resource.data.ownerUid is string && resource.data.ownerUid == request.auth.uid) ||
+        isStaffOrAdmin()
+      );
+      allow list: if isSignedIn() && (
+        (resource.data.ownerUid is string && resource.data.ownerUid == request.auth.uid) ||
+        isStaffOrAdmin()
+      );
+      allow create, update, delete: if false;
+    }
+
+    // --- 7. Financial Ledger & Cash Data (/finances/{transactionId}) ---
+    // No public read. Strictly readable by verified Finance roles (Bendahara, Auditor, Direktur, SuperAdmin).
+    // All accounting mutations, journal adjustments, and ledger writes must go through trusted backend.
+    match /finances/{transactionId} {
+      allow get: if isValidId(transactionId) && isFinanceManager();
+      allow list: if isFinanceManager();
+      allow create, update, delete: if false;
+    }
+
+    // --- 8. Global Website Settings (/siteSettings/{settingId}) ---
+    // No public read from Firestore (public website utilizes bundled config / backend API).
+    // Read: verified staff or admin only.
+    // Update: superadmin only with strict schema validation; create/delete denied.
+    match /siteSettings/{settingId} {
+      allow get: if isValidId(settingId) && isStaffOrAdmin();
+      allow list: if isStaffOrAdmin();
+      allow update: if isSuperAdmin() && isValidId(settingId)
+        && incoming().diff(existing()).affectedKeys().hasOnly([
+          'siteTitle',
+          'metaDescription',
+          'metaKeywords',
+          'canonicalUrl',
+          'ogTitle',
+          'ogDescription',
+          'ogImageUrl',
+          'robotsIndexing',
+          'googleSearchConsoleId',
+          'googleAnalyticsId',
+          'author',
+          'updatedAt',
+          'updatedBy'
+        ])
+        && (!('siteTitle' in incoming()) || (incoming().siteTitle is string && incoming().siteTitle.size() <= 200))
+        && (!('metaDescription' in incoming()) || (incoming().metaDescription is string && incoming().metaDescription.size() <= 500))
+        && (!('metaKeywords' in incoming()) || (incoming().metaKeywords is string && incoming().metaKeywords.size() <= 300))
+        && (!('canonicalUrl' in incoming()) || (incoming().canonicalUrl is string && incoming().canonicalUrl.size() <= 250))
+        && (!('ogTitle' in incoming()) || (incoming().ogTitle is string && incoming().ogTitle.size() <= 200))
+        && (!('ogDescription' in incoming()) || (incoming().ogDescription is string && incoming().ogDescription.size() <= 500))
+        && (!('ogImageUrl' in incoming()) || (incoming().ogImageUrl is string && incoming().ogImageUrl.size() <= 500))
+        && (!('robotsIndexing' in incoming()) || (incoming().robotsIndexing in ['index, follow', 'noindex, nofollow', 'noindex, follow']))
+        && incoming().updatedAt is timestamp;
+      allow create, delete: if false;
+    }
+
+  }
+}

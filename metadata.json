@@ -1,0 +1,6 @@
+{
+  "name": "BUMDES Waskita Wijaya",
+  "description": "Website informasi dan portal manajemen berkas BUMDES Waskita Wijaya, Desa Waru, Kec Baki, Kab Sukoharjo.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

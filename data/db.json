@@ -1,0 +1,494 @@
+{
+  "users": [
+    {
+      "id": "usr_superadmin_denboy",
+      "email": "den.boy2308@gmail.com",
+      "passwordHash": "$scrypt$v=1$N=16384,r=8,p=1$1b89bd1811698f3b41bdf930243f605f$10da65eb4992f858fc38b2e7c73a59a996f350ae20109ffd7ec7f7d7458e453190c77d3727b8b3e8aa483400d9d2d60c237580f1dccd533f1fab0e32a549fcff",
+      "role": "superadmin",
+      "name": "Den Boy (Super Administrator Utama)",
+      "phone": "081234567890"
+    },
+    {
+      "id": "usr_superadmin_master",
+      "email": "superadmin@bumdeswaskita.id",
+      "passwordHash": "$scrypt$v=1$N=16384,r=8,p=1$1b89bd1811698f3b41bdf930243f605f$10da65eb4992f858fc38b2e7c73a59a996f350ae20109ffd7ec7f7d7458e453190c77d3727b8b3e8aa483400d9d2d60c237580f1dccd533f1fab0e32a549fcff",
+      "role": "superadmin",
+      "name": "Super Administrator BUMDes",
+      "phone": "081234567890"
+    },
+    {
+      "id": "usr_superadmin",
+      "email": "admin@bumdesa.id",
+      "passwordHash": "$scrypt$v=1$N=16384,r=8,p=1$1b89bd1811698f3b41bdf930243f605f$10da65eb4992f858fc38b2e7c73a59a996f350ae20109ffd7ec7f7d7458e453190c77d3727b8b3e8aa483400d9d2d60c237580f1dccd533f1fab0e32a549fcff",
+      "role": "superadmin",
+      "name": "Budi Santoso (Dev Admin)"
+    },
+    {
+      "id": "usr_karyawan",
+      "email": "karyawan@bumdesa.id",
+      "passwordHash": "$scrypt$v=1$N=16384,r=8,p=1$6a1d567c95163c605605b95c829fbf40$424d78550adc1b5c800dfba26b1343a1525e4a1ee1ed0fd4e001863499a9ea8455ada88ac607f4661c5a642c98e8a0848a369017dca4d6f1da8da6e8ed056c82",
+      "role": "karyawan",
+      "name": "Slamet Rahardjo (Teller & Kasir)",
+      "phone": "085678901234"
+    },
+    {
+      "id": "usr_warga",
+      "email": "warga@bumdesa.id",
+      "passwordHash": "$scrypt$v=1$N=16384,r=8,p=1$a2e0f1b6a825f7030037e9532b64911b$37a71048dc8b4f63e6b41e03cdabea81b283c378774489be5af321f029acd3b703fb30138f78c231c238af167b9745a4e13235a37bc793414d6a15ba0a7f6454",
+      "role": "pengguna",
+      "name": "Siti Aminah (Nasabah RT 03)",
+      "phone": "081987654321",
+      "nik": "3302198204910002",
+      "nasabahId": "NSB-38290"
+    }
+  ],
+  "files": [],
+  "sessions": [
+    {
+      "token": "tok_fnzu51dv06jj8if0285xrj",
+      "userId": "usr_warga",
+      "expiresAt": 1789314621206
+    },
+    {
+      "token": "tok_b7z0femrauq0744xf8p58cu",
+      "userId": "usr_superadmin",
+      "expiresAt": 1789315515885
+    },
+    {
+      "token": "tok_p5ow7yvoizh7imho9lx4z6",
+      "userId": "usr_superadmin",
+      "expiresAt": 1790803164796
+    },
+    {
+      "token": "tok_z8r6yjnfjmexjc555yn4pg",
+      "userId": "usr_superadmin",
+      "expiresAt": 1792493616601
+    }
+  ],
+  "reservations": [
+    {
+      "id": "BW-20260906-8921",
+      "facility": "Lapangan 1 (Karpet Vinyl)",
+      "facilityKey": "lapangan1",
+      "date": "2026-09-06",
+      "timeSlot": "19:00",
+      "durationHours": 2,
+      "slots": [
+        "19:00",
+        "20:00"
+      ],
+      "customerName": "PB Rajawali Waru",
+      "whatsapp": "081234567890",
+      "email": "rajawali@waru.desa.id",
+      "participantCount": 8,
+      "purpose": "Latihan Rutin Bulutangkis Warga",
+      "totalAmount": 100000,
+      "paymentMethod": "qris",
+      "paymentStatus": "confirmed",
+      "checkInStatus": "pending",
+      "addons": [
+        "Penerangan Lampu LED"
+      ],
+      "createdAt": "2026-09-24T17:46:54.991Z"
+    },
+    {
+      "id": "BW-20260906-3412",
+      "facility": "Gedung Serbaguna",
+      "facilityKey": "gedung",
+      "date": "2026-09-06",
+      "timeSlot": "09:00",
+      "durationHours": 2,
+      "slots": [
+        "09:00",
+        "10:00"
+      ],
+      "customerName": "Seminar PKK Baki",
+      "whatsapp": "085678901234",
+      "email": "pkk@sukoharjo.go.id",
+      "participantCount": 45,
+      "purpose": "Sosialisasi Pemberdayaan Perempuan",
+      "totalAmount": 200000,
+      "paymentMethod": "bank_transfer",
+      "paymentStatus": "confirmed",
+      "checkInStatus": "checked_in",
+      "addons": [
+        "Sound System BUMDes",
+        "Kursi Lipat 50 Unit"
+      ],
+      "createdAt": "2026-09-24T17:46:54.991Z"
+    },
+    {
+      "id": "BW-20260906-1189",
+      "facility": "Lapangan 2 (Kayu Parquet)",
+      "facilityKey": "lapangan2",
+      "date": "2026-09-06",
+      "timeSlot": "16:00",
+      "durationHours": 1,
+      "slots": [
+        "16:00"
+      ],
+      "customerName": "PB Sahabat Waru (Bpk. Agus)",
+      "whatsapp": "081987654321",
+      "participantCount": 4,
+      "purpose": "Sparing Sore GOR",
+      "totalAmount": 50000,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "checkInStatus": "pending",
+      "notes": "Bayar tunai di loket teller",
+      "createdAt": "2026-09-24T17:46:54.991Z"
+    },
+    {
+      "id": "BW-20260906-8670",
+      "facility": "Gedung Serbaguna",
+      "facilityKey": "gedung",
+      "date": "2026-09-06",
+      "timeSlot": "19:00",
+      "durationHours": 1,
+      "slots": [
+        "19:00"
+      ],
+      "customerName": "Dimas Pratama",
+      "whatsapp": "081234567890",
+      "participantCount": 4,
+      "purpose": "Latihan komunitas",
+      "totalAmount": 85000,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "addons": [],
+      "createdAt": "2026-09-25T13:55:23.434Z"
+    },
+    {
+      "id": "BW-20261012-1642",
+      "facility": "Lapangan 3",
+      "facilityKey": "lapangan3",
+      "date": "2026-10-12",
+      "timeSlot": "08:00",
+      "durationHours": 1,
+      "slots": [
+        "08:00"
+      ],
+      "customerName": "Budi Test",
+      "whatsapp": "081234567890",
+      "participantCount": 4,
+      "purpose": "Booking Kilat Online",
+      "totalAmount": 50000,
+      "paymentMethod": "cash",
+      "paymentStatus": "pending",
+      "checkInStatus": "pending",
+      "notes": "Booking Kilat",
+      "createdAt": "2026-10-12T11:24:11.071Z"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "INV-2026-089",
+      "name": "Bpk. Joko Susanto",
+      "category": "Bank Sampah Rumah Tangga (Paket Dusun I)",
+      "zone": "Dusun I / RT 02 RW 01",
+      "phone": "6281234567890",
+      "nasabahId": "NAS-089",
+      "amount": 75000,
+      "dueDate": "2026-09-05",
+      "period": "September 2026",
+      "status": "belum_bayar",
+      "portalUrl": "https://bumdeswaskita.desa.id/portal/bayar/NAS-089",
+      "createdAt": "2026-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "INV-2026-104",
+      "name": "Ibu Hartini Sutrisno",
+      "category": "Bank Sampah & Retribusi Niaga (Warung Makan)",
+      "zone": "Dusun II / RT 04 RW 02",
+      "phone": "6285712345678",
+      "nasabahId": "NAS-104",
+      "amount": 75000,
+      "dueDate": "2026-09-04",
+      "period": "September 2026",
+      "status": "belum_bayar",
+      "portalUrl": "https://bumdeswaskita.desa.id/portal/bayar/NAS-104",
+      "createdAt": "2026-09-01T08:30:00.000Z"
+    },
+    {
+      "id": "INV-2026-012",
+      "name": "Bpk. Subagyo Martono",
+      "category": "Bank Sampah Rumah Tangga",
+      "zone": "Dusun I / RT 01 RW 01",
+      "phone": "6281398765432",
+      "nasabahId": "NAS-012",
+      "amount": 150000,
+      "dueDate": "2026-09-01",
+      "period": "September 2026",
+      "status": "lunas",
+      "paymentDetails": {
+        "paidAt": "2026-09-01 10:20:00",
+        "method": "cash",
+        "receiptNumber": "KWT-BW-202609-012",
+        "verifiedBy": "Kasir BUMDes Waru",
+        "notes": "Pelunasan tunai di loket kantor"
+      },
+      "portalUrl": "https://bumdeswaskita.desa.id/portal/bayar/NAS-012",
+      "createdAt": "2026-09-01T07:45:00.000Z"
+    },
+    {
+      "id": "INV-2026-034",
+      "name": "Ibu Ratna Dewi",
+      "category": "Bank Sampah Rumah Tangga",
+      "zone": "Dusun III / RT 02 RW 03",
+      "phone": "6281211223344",
+      "nasabahId": "NAS-034",
+      "amount": 150000,
+      "dueDate": "2026-09-02",
+      "period": "September 2026",
+      "status": "lunas",
+      "paymentDetails": {
+        "paidAt": "2026-09-02 08:45:00",
+        "method": "qris",
+        "receiptNumber": "KWT-BW-202609-034",
+        "verifiedBy": "QRIS Auto-Settlement",
+        "notes": "Pembayaran digital scan QRIS"
+      },
+      "portalUrl": "https://bumdeswaskita.desa.id/portal/bayar/NAS-034",
+      "createdAt": "2026-09-01T07:50:00.000Z"
+    },
+    {
+      "id": "INV-2026-055",
+      "name": "Bpk. Ahmad Fauzi",
+      "category": "Bank Sampah Rumah Tangga",
+      "zone": "Dusun II / RT 01 RW 02",
+      "phone": "6287899001122",
+      "nasabahId": "NAS-055",
+      "amount": 150000,
+      "dueDate": "2026-09-02",
+      "period": "September 2026",
+      "status": "lunas",
+      "paymentDetails": {
+        "paidAt": "2026-09-02 14:15:00",
+        "method": "bank_transfer",
+        "receiptNumber": "KWT-BW-202609-055",
+        "verifiedBy": "Bendahara BUMDes",
+        "notes": "Transfer Bank Jateng"
+      },
+      "portalUrl": "https://bumdeswaskita.desa.id/portal/bayar/NAS-055",
+      "createdAt": "2026-09-01T08:10:00.000Z"
+    },
+    {
+      "id": "INV-2026-8921",
+      "name": "PB Rajawali Waru",
+      "category": "Sewa Lapangan GOR",
+      "zone": "Klub Olahraga Desa Waru",
+      "phone": "081234567890",
+      "amount": 100000,
+      "dueDate": "2026-09-06",
+      "period": "September 2026",
+      "status": "lunas",
+      "reservationId": "BW-20260906-8921",
+      "paymentDetails": {
+        "paidAt": "2026-09-06 09:15:00",
+        "method": "qris",
+        "receiptNumber": "KWT-BW-202609-8921",
+        "verifiedBy": "Kasir GOR Waru",
+        "notes": "Booking Lapangan 1 (Karpet Vinyl) 2 Jam"
+      },
+      "createdAt": "2026-09-06T09:14:00.000Z"
+    },
+    {
+      "id": "INV-2026-1189",
+      "name": "PB Sahabat Waru (Bpk. Agus)",
+      "category": "Sewa Lapangan GOR",
+      "zone": "Warga RT 02 / RW 01",
+      "phone": "081987654321",
+      "amount": 50000,
+      "dueDate": "2026-09-06",
+      "period": "September 2026",
+      "status": "belum_bayar",
+      "reservationId": "BW-20260906-1189",
+      "createdAt": "2026-09-06T15:30:00.000Z"
+    },
+    {
+      "id": "INV-2026-8670",
+      "name": "Dimas Pratama",
+      "category": "Sewa Gedung",
+      "zone": "Kompleks GOR BUMDes Waru",
+      "phone": "081234567890",
+      "amount": 85000,
+      "dueDate": "2026-09-06",
+      "period": "September 2026",
+      "status": "belum_bayar",
+      "reservationId": "BW-20260906-8670",
+      "portalUrl": "https://bumdeswaskita.desa.id/portal/bayar/BW-20260906-8670",
+      "createdAt": "2026-09-25T13:55:23.434Z"
+    },
+    {
+      "id": "INV-2026-1642",
+      "name": "Budi Test",
+      "category": "Sewa Lapangan GOR",
+      "zone": "Kompleks GOR BUMDes Waru",
+      "phone": "081234567890",
+      "amount": 50000,
+      "dueDate": "2026-10-12",
+      "period": "September 2026",
+      "status": "belum_bayar",
+      "reservationId": "BW-20261012-1642",
+      "portalUrl": "https://bumdeswaskita.desa.id/portal/bayar/BW-20261012-1642",
+      "createdAt": "2026-10-12T11:24:11.071Z"
+    }
+  ],
+  "financeTransactions": [
+    {
+      "id": "TRX-2026-0901",
+      "type": "income",
+      "category": "Retribusi Sampah",
+      "amount": 450000,
+      "date": "2026-09-02",
+      "referenceId": "BATCH-SMP-01",
+      "description": "Penerimaan Retribusi Sampah Terverifikasi Dusun I & II",
+      "paymentMethod": "cash",
+      "recordedBy": "Siti Rahayu, S.E. (Bendahara)",
+      "createdAt": "2026-09-02T16:00:00.000Z"
+    },
+    {
+      "id": "TRX-2026-0902",
+      "type": "income",
+      "category": "Reservasi GOR",
+      "amount": 100000,
+      "date": "2026-09-06",
+      "referenceId": "BW-20260906-8921",
+      "description": "Sewa Lapangan 1 Badminton PB Rajawali Waru",
+      "paymentMethod": "qris",
+      "recordedBy": "Joko Sasongko (Operator GOR)",
+      "createdAt": "2026-09-06T09:15:00.000Z"
+    },
+    {
+      "id": "TRX-2026-0903",
+      "type": "income",
+      "category": "Sewa Gedung",
+      "amount": 200000,
+      "date": "2026-09-06",
+      "referenceId": "BW-20260906-3412",
+      "description": "Sewa Aula Pertemuan Seminar PKK Baki",
+      "paymentMethod": "bank_transfer",
+      "recordedBy": "Siti Rahayu, S.E. (Bendahara)",
+      "createdAt": "2026-09-06T10:00:00.000Z"
+    },
+    {
+      "id": "TRX-2026-0904",
+      "type": "expense",
+      "category": "Operasional & Perawatan",
+      "amount": 350000,
+      "date": "2026-09-03",
+      "description": "Pembayaran Rekening Listrik & Lampu Sorot Lapangan GOR",
+      "paymentMethod": "bank_transfer",
+      "recordedBy": "Siti Rahayu, S.E. (Bendahara)",
+      "createdAt": "2026-09-03T11:00:00.000Z"
+    },
+    {
+      "id": "TRX-2026-0905",
+      "type": "expense",
+      "category": "Operasional & Perawatan",
+      "amount": 200000,
+      "date": "2026-09-04",
+      "description": "Bahan Pembersih Karpet Vinyl Lapangan Badminton & Sanitasi Toilet",
+      "paymentMethod": "cash",
+      "recordedBy": "Joko Sasongko (Operator GOR)",
+      "createdAt": "2026-09-04T13:30:00.000Z"
+    }
+  ],
+  "qrisTransactions": [
+    {
+      "id": "QRIS-9921",
+      "nmid": "ID102600987123",
+      "payerName": "PB Baki Perkasa (Bpk. Dani)",
+      "purpose": "Sewa Lapangan Badminton 1 & 2",
+      "amount": 80000,
+      "time": "13:45:12",
+      "status": "settled",
+      "createdAt": "2026-09-06T13:45:12.000Z"
+    },
+    {
+      "id": "QRIS-9920",
+      "nmid": "ID102600987123",
+      "payerName": "Rizky Ramadhan",
+      "purpose": "Tiket Booking Lapangan 2",
+      "amount": 40000,
+      "time": "13:42:05",
+      "status": "settled",
+      "createdAt": "2026-09-06T13:42:05.000Z"
+    },
+    {
+      "id": "QRIS-9919",
+      "nmid": "ID102600987123",
+      "payerName": "Warung Bu Joko (Dusun I)",
+      "purpose": "Retribusi Bank Sampah",
+      "amount": 75000,
+      "time": "11:15:30",
+      "status": "settled",
+      "createdAt": "2026-09-06T11:15:30.000Z"
+    },
+    {
+      "id": "QRIS-9918",
+      "nmid": "ID102600987123",
+      "payerName": "Karang Taruna RW 03",
+      "purpose": "Uang Muka Sewa Aula Pesta",
+      "amount": 500000,
+      "time": "09:30:18",
+      "status": "settled",
+      "createdAt": "2026-09-06T09:30:18.000Z"
+    }
+  ],
+  "tickets": [
+    {
+      "id": "TKT-ADU-260925-235",
+      "title": "Uji Tiket Dukungan Tahap 9",
+      "category": "Pertanyaan Layanan",
+      "description": "Pengujian integrasi kanal pengaduan dan bantuan warga",
+      "location": "RT 01 RW 01",
+      "name": "Warga Penguji",
+      "contact": "082199887766",
+      "status": "Selesai",
+      "createdAt": "2026-09-25T14:18:55.104Z",
+      "assignedOfficer": "Staf Helpdesk BUMDes",
+      "resolutionNote": "Tiket telah diverifikasi dan diselesaikan dengan sukses.",
+      "updatedAt": "2026-09-25T14:19:03.161Z"
+    },
+    {
+      "id": "TKT-ADU-108",
+      "title": "Tong Sampah Terpilah Depan Gang Belum Terangkut",
+      "category": "Armada Sampah",
+      "description": "Armada truk sampah rute RT 03 belum lewat sejak kemarin lusa, sampah botol daur ulang sudah penuh di depan gang.",
+      "location": "Dukuh Waru, RT 03 / RW 01",
+      "name": "Bpk. Joko Susanto",
+      "contact": "6281234567890",
+      "status": "Sedang Dikerjakan",
+      "assignedOfficer": "Slamet Rahardjo (Truk Armada 02)",
+      "resolutionNote": "Armada truk 02 dijadwalkan menjemput hari ini pukul 11:00 WIB.",
+      "createdAt": "2026-09-05T08:30:00.000Z"
+    },
+    {
+      "id": "TKT-ADU-094",
+      "title": "Lampu LED Lapangan 1 Bagian Pojok Timur Berkedip",
+      "category": "Fasilitas GOR & Gedung",
+      "description": "Saat sesi main malam kemarin, salah satu lampu sorot LED berkedip sehingga silau saat servis.",
+      "location": "GOR Badminton Desa Waru",
+      "name": "Siti Aminah",
+      "contact": "6285612341234",
+      "status": "Selesai",
+      "assignedOfficer": "Hartini (Teknisi GOR)",
+      "resolutionNote": "Driver LED sudah diganti baru oleh teknisi BUMDes pada 29 Agustus 2026.",
+      "createdAt": "2026-08-28T14:15:00.000Z"
+    },
+    {
+      "id": "TKT-ADU-072",
+      "title": "Pertanyaan Syarat Pemesanan Gedung Pertemuan untuk Resepsi",
+      "category": "Pertanyaan Layanan",
+      "description": "Apakah sewa gedung serbaguna sudah mencakup izin keramaian desa dan teknisi sound system?",
+      "location": "Desa Waru",
+      "name": "Bpk. Bambang Purnomo",
+      "contact": "6281987654321",
+      "status": "Selesai",
+      "assignedOfficer": "Pelayanan Kantor BUMDes",
+      "resolutionNote": "Paket sewa All-in Rp 2.500.000 sudah mencakup teknisi, sound system, kursi 300 unit, dan rekomendasi izin desa.",
+      "createdAt": "2026-08-20T09:00:00.000Z"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+# ==============================================================
+# Caddyfile: BUMDES Waskita Wijaya (bumdeswaskita.desa.id)
+# Zero-configuration automatic HTTPS with Let's Encrypt / ZeroSSL
+# ==============================================================
+
+bumdeswaskita.desa.id, www.bumdeswaskita.desa.id {
+    # Automatic HTTPS TLS certificate generation
+    tls admin@bumdeswaskita.desa.id
+
+    # Security Headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "SAMEORIGIN"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        Permissions-Policy "camera=(), microphone=(), geolocation=(self)"
+        -Server
+    }
+
+    # Gzip & Zstandard Compression
+    encode zstd gzip
+
+    # Reverse proxy to Node.js backend
+    reverse_proxy 127.0.0.1:3000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+
+        # Health check upstream monitoring
+        health_uri /api/health
+        health_interval 30s
+        health_timeout 5s
+    }
+
+    # Logging format
+    log {
+        output file /var/log/caddy/bumdes_access.log {
+            roll_size 50mb
+            roll_keep 5
+            roll_keep_for 720h
+        }
+        format json
+    }
+}
